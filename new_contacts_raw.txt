@@ -1,0 +1,35 @@
+| Name             | Whatsapp Number | Area of Interest                        |
+| :--------------- | :-------------- | :-------------------------------------- |
+| Shahina Firdaus  | 7678219599      | Music performance                       |
+| sakshi sinha     | 9971081246      | Fashion and modeling                    |
+| Prajjval Verma   | 9305467305      | PR and Social media                     |
+| Akshita Dhingra  | 8218633410      | Fashion and modeling                    |
+| vibhor           | 6284942484      | tech                                    |
+| Siddh Jain       | 9897748929      | PR and Social media                     |
+| Vasundhara singh | 9871241556      | Fashion and modeling                    |
+| Tushar Tanwar    | 9466323360      | Management                              |
+| Pragya Rajput    | 9058512681      | Music performance                       |
+| Anushka Gupta    | 7451891458      | Management                              |
+| Shivam Kashyap   | 7761890453      | Management                              |
+| Vamika Jaiswal   | 7505630840      | Film making                             |
+| Shivam Kashyap   | 7761890453      | Film making                             |
+| Muskan gupta     | 8273278303      | Film making                             |
+| Vasundhara singh | 9871241556      | Fashion and modeling                    |
+| Sakshi Gupta     | 8887922789      | Choreography (story telling with dance) |
+| Sakshi           | 8178392614      | Choreography (story telling with dance) |
+| Namrata singh    | 9415421165      | Choreography (story telling with dance) |
+| Avneesh kumar    | 9760166210      | Music performance                       |
+| Luzen Ali Parvez | 9045064400      | Music performance                       |
+| Anushka Varshney | 8218654268      | Choreography (story telling with dance) |
+| Kartik Kaushik   | 8368182130      | Music performance                       |
+| Gaurang Agarwal  | 7037415829      | tech                                    |
+| Vansh pandey     | 8737970001      | Film making                             |
+| Deepanshu joshi  | 9520548086      | Music performance                       |
+| Mohit Sharma     | 8823897941      | Music performance                       |
+| Arnav Saxena     | 6395087017      | Music performance                       |
+| Lokesh           | 9306709959      | Fashion and modeling                    |
+| Aksha sharma     | 8920632972      | Fashion and modeling                    |
+| Aayush kansal    | 9528561277      | Management                              |
+| Amreshwar Singh  | 7457985646      | Music performance                       |
+| Shaurya tiwari   | 7065649910      | tech                                    |
+| Yash Sharma      | 8178717474      | PR and Social media                     |
