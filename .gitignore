@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+email_config.json
+.env
+chrome_profile_mail/
+brave_profile_mail/
+attachment.png

@@ -1,3 +1,6 @@
+import os
+import time
+import urllib.parse
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -6,8 +9,21 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
-import time
-import urllib.parse
+
+def find_browser_executable():
+    """Finds Brave Browser first, then Google Chrome."""
+    candidates = [
+        os.path.expandvars(r"%LOCALAPPDATA%\BraveSoftware\Brave-Browser\Application\brave.exe"),
+        r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
+        r"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
 
 def send_whatsapp_messages(csv_file):
     # Load contacts
@@ -17,12 +33,15 @@ def send_whatsapp_messages(csv_file):
         print(f"Error: {csv_file} not found.")
         return
 
-    # Setup Chrome options
+    # Setup browser options
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless") # Do not use headless for WhatsApp Web as it requires scanning QR
+    browser_exe = find_browser_executable()
+    browser_name = "Brave" if browser_exe and "brave.exe" in browser_exe.lower() else "Chrome"
+    if browser_exe:
+        options.binary_location = browser_exe
     
     # Initialize WebDriver
-    print("Initializing browser...")
+    print(f"Initializing {browser_name} browser...")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     
     # Open WhatsApp Web

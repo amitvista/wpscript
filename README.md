@@ -1,15 +1,16 @@
 <div align="center">
 
-# ⚡ WhatsApp Bulk Automator
-### *High-Performance, Personalized Bulk Messaging Automation for WhatsApp Web*
+# ⚡ Bulk Outreach Automation Suite
+### *High-Performance, Zero-Password Bulk Messaging for WhatsApp Web & Gmail Web*
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.x-43B02A?style=for-the-badge&logo=selenium&logoColor=white)](https://www.selenium.dev/)
-[![Chrome](https://img.shields.io/badge/Google%20Chrome-Automated-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.google.com/chrome/)
+[![Brave](https://img.shields.io/badge/Brave_Browser-Automated-FB542B?style=for-the-badge&logo=brave&logoColor=white)](https://brave.com/)
+[![Chrome](https://img.shields.io/badge/Google_Chrome-Supported-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.google.com/chrome/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <b>Automate outreach</b> • <b>Dynamic CSV message merging</b> • <b>Safe delays & rate-pacing</b>
+  <b>Dual-Channel Dispatch</b> • <b>Brave/Chrome Logged-In Profile</b> • <b>One-Time Template Design</b> • <b>Zero Password Required</b>
 </p>
 
 ---
@@ -18,144 +19,130 @@
 
 ## 📌 Overview
 
-**WhatsApp Bulk Automator** is a lightweight, reliable Python automation tool designed to send personalized WhatsApp messages at scale using Selenium and WhatsApp Web. It handles dynamic contact variables, custom URLs, and login session detection without needing paid API subscriptions.
+This repository provides two automated dispatch engines built on top of Selenium:
+
+1. **📧 Gmail Web Bulk Automator (`email_sender.py`)**:
+   - Uses your **existing logged-in browser profile** (Brave / Chrome) — no Google App Passwords or 2FA hassle.
+   - Supports **multi-account switching**: switch to any Gmail account tab in Brave before typing `send`.
+   - **Modular template setup**: keep recipient emails, campaign subject, email body, and poster attachments in separate, easy-to-edit files.
+   - Auto un-minimizes compose dialogs and verifies attachment uploads before sending.
+
+2. **💬 WhatsApp Web Bulk Automator (`whatsapp_sender.py`)**:
+   - Automated direct-chat routing via URL encoding.
+   - Dynamic per-contact personalization and safe rate-pacing delays.
 
 ```mermaid
-graph LR
-    A[📄 contacts.csv] --> B[🐍 whatsapp_sender.py]
-    B --> C[🌐 Google Chrome / Selenium]
-    C --> D[📲 WhatsApp Web QR Login]
-    D --> E[💬 Personalized Chat Dispatch]
-    E --> F[✅ Delivery & Progress Logs]
+graph TD
+    subgraph "📧 Email Campaign"
+        A1["📄 email_contacts.csv (Name, Email)"] --> E["🐍 email_sender.py"]
+        A2["📝 email_subject.txt"] --> E
+        A3["📝 email_template.txt ({Name})"] --> E
+        A4["📎 email_attachment.txt (Poster/File)"] --> E
+        E --> B1["🦁 Brave / Chrome (Logged-in Gmail)"]
+        B1 --> M["📬 Live Bulk Dispatch"]
+    end
+
+    subgraph "💬 WhatsApp Campaign"
+        W1["📄 contacts.csv (Name, Phone, Msg)"] --> W["🐍 whatsapp_sender.py"]
+        W --> B2["🌐 WhatsApp Web"]
+        B2 --> WA["📲 Direct-to-Chat Messages"]
+    end
 ```
 
 ---
 
-## ✨ Features
+## 📧 Gmail Web Bulk Automator
 
-- 🎯 **Dynamic Personalization**: Automatically substitutes names, links, and custom messages per recipient.
-- 🔄 **Automated Driver Management**: Zero manual ChromeDriver downloads; `webdriver-manager` takes care of updates.
-- 🛡️ **Session Detection**: Smart waiting for WhatsApp Web login authentication before dispatching.
-- 💬 **Encoded URL Chat Dispatch**: Direct-to-chat URL routing without needing to save contacts in your address book first.
-- 📝 **Comment Support**: Easily toggle contacts on/off in `contacts.csv` by prefixing lines with `#`.
+### 📂 File Structure
 
----
+| File | Purpose | Example / Details |
+| :--- | :--- | :--- |
+| **[email_contacts.csv](file:///c:/python%20script/email_contacts.csv)** | Contact list | Just two columns: `Name,Email`. Add as many rows as you need. |
+| **[email_subject.txt](file:///c:/python%20script/email_subject.txt)** | Campaign Subject | E.g., `Invitation for VIBRANT 2K26 Fest` |
+| **[email_template.txt](file:///c:/python%20script/email_template.txt)** | Campaign Body Template | Full text message with `{Name}` dynamic placeholder. |
+| **[email_attachment.txt](file:///c:/python%20script/email_attachment.txt)** | Attachment Path | Absolute file path, e.g. `C:\Users\amitm\OneDrive\Desktop\poster.jpeg` |
 
-## ⚠️ Safe Usage & Anti-Ban Advisory
+### 🚀 Running the Email Automator
 
-> [!WARNING]
-> **Use this tool ethically and responsibly.** WhatsApp strictly monitors bulk spam activities. Sending unsolicited mass messages will lead to account restrictions or permanent phone number bans.
+```powershell
+python email_sender.py
+```
 
-> [!IMPORTANT]
-> **Recommended Safety Practices:**
-> - ✅ **Test with your own number first** before running multi-contact campaigns.
-> - ✅ **Keep batch sizes small** (10–30 messages per session).
-> - ✅ **Add random sleep intervals** between messages (5–15 seconds).
-> - ✅ **Only message contacts who have opted in** or explicitly consented.
+1. **Brave launches** automatically with your existing logged-in Gmail profile on dedicated debugging port `9555`.
+2. **Switch Accounts Freely**: If you have multiple Gmail accounts, click your profile avatar in Gmail and select the account you want to send from.
+3. **Trigger Dispatch**: Return to your terminal and type **`send`** (or press `[Enter]`).
+4. The automator detects your active account, un-minimizes compose boxes, fills the recipient, subject, and personalized body, uploads the poster attachment, and dispatches the emails!
 
----
+```
+[1/3] 🌐 Launching Brave with your logged-in Gmail profile...
+[2/3] 📬 Brave is open with Gmail Web!
+👉 Type 'send' (or press Enter) when ready to start sending: send
 
-## 🚀 Quick Start
+✅ Active Sender Account Detected: <amitmyadv@gmail.com> (Account /u/1)
+🚀 Dispatching all emails from this account!
 
-### 1. Prerequisites
-
-Make sure you have installed:
-* [Python 3.8+](https://www.python.org/downloads/)
-* [Google Chrome](https://www.google.com/chrome/)
-
-### 2. Installation
-
-Clone or download this repository, navigate to the folder, and install the required dependencies:
-
-```bash
-# Navigate to directory
-cd "c:\python script"
-
-# Install dependencies
-pip install -r requirements.txt
+[3/3] Iterating 13 email contact(s)...
+  ↳ [1/13] Sending email to Amit (amitfblock@gmail.com)...  [Attaching poster.jpeg...] [OK]
+  ↳ [2/13] Sending email to amitvista (24112cn076@glbitm.ac.in)...  [Attaching poster.jpeg...] [OK]
+...
+🎉 All emails processed!
+   Successfully Sent: 13
+   Failed/Skipped:    0
 ```
 
 ---
 
-## ⚙️ Configuration & Data Format
+## 💬 WhatsApp Web Bulk Automator
 
-### `contacts.csv` Structure
+### ⚙️ Contacts Configuration
 
-Configure your recipient list in [contacts.csv](file:///c:/python%20script/contacts.csv). Always format phone numbers with their international **country code** (without `+` or leading `00`):
+Configure your contacts in [contacts.csv](file:///c:/python%20script/contacts.csv). Format phone numbers with international **country code** (without `+` or leading `00`):
 
 ```csv
 Name,Phone,Message
-John Doe,919876543210,"Hello John, this is an example test message from WhatsApp Sender."
-Jane Smith,919876543211,"Hi Jane, your appointment is confirmed for tomorrow at 10:00 AM."
-Alex Johnson,919876543212,"Hello Alex! Thank you for joining our community."
-# Inactive User,919876543299,"This row is commented out and will be skipped."
+John Doe,919876543210,"Hello John, this is an example test message."
+Jane Smith,919876543211,"Hi Jane, your registration is confirmed."
+# Inactive User,919876543299,"Commented out row will be skipped."
 ```
 
-| Field | Required | Description | Example |
-| :--- | :---: | :--- | :--- |
-| **`Name`** | Yes | Recipient full name or nickname | `John Doe` |
-| **`Phone`** | Yes | International format with country code | `919876543210` (India), `12025550123` (US) |
-| **`Message`**| Optional | Custom text (enclosed in double quotes) | `"Hello John, see you tomorrow!"` |
+### 🚀 Running the WhatsApp Automator
 
----
-
-## 💻 Execution Workflow
-
-```bash
+```powershell
 python whatsapp_sender.py
 ```
 
-```
-[1/3] 🌐 Initializing Chrome WebDriver...
-[2/3] 📲 Opening WhatsApp Web... Please scan QR code with your phone.
-[3/3] 🚀 Logged in! Iterating contacts list...
-      ↳ Sending message to John Doe (919876543210)... [OK]
-      ↳ Sending message to Jane Smith (919876543211)... [OK]
-🎉 All messages sent successfully!
-```
-
-> [!TIP]
-> **Hands-Off Mode**: Do not click, type, or switch tabs inside the automated Chrome window while the script is running to prevent input interruptions.
+1. Chrome/Brave opens WhatsApp Web.
+2. Scan the QR code once with your phone.
+3. Once logged in, the script dispatches personalized messages to every recipient with safe pacing intervals.
 
 ---
 
-## 📂 Repository Structure
+## 🛠️ Repository Directory Tree
 
 ```tree
 📦 python script/
- ┣ 📜 README.md              # Documentation & guide
+ ┣ 📜 README.md              # Complete guide & documentation
  ┣ 📜 requirements.txt       # Dependencies (selenium, pandas, webdriver-manager)
- ┣ 📊 contacts.csv           # Recipient list & message payload
- ┣ 🚀 whatsapp_sender.py     # Main execution engine
- ┣ 🛠️ process_contacts.py    # Raw markdown table / text parser
- ┣ 🛠️ update_csv.py          # Batch tab-delimited contact updater
- ┗ 🛠️ append_fashion.py      # Custom invitation & template builder
+ ┣ 📊 email_contacts.csv     # Email recipient list (Name, Email)
+ ┣ 📝 email_subject.txt      # Campaign email subject line
+ ┣ 📝 email_template.txt     # Campaign email body template with {Name}
+ ┣ 📎 email_attachment.txt   # File path to default poster / attachment
+ ┣ 🚀 email_sender.py        # Zero-password Gmail Web bulk automator
+ ┣ 📊 contacts.csv           # WhatsApp contacts & messages
+ ┗ 🚀 whatsapp_sender.py     # WhatsApp Web bulk automation engine
 ```
 
 ---
 
-## 🔍 Troubleshooting & FAQ
+## ⚠️ Safe Outreach Guidelines
 
-<details>
-<summary><b>❓ QR Code times out after scanning</b></summary>
-<br>
-Increase the timeout inside <code>whatsapp_sender.py</code> under <code>WebDriverWait(driver, 300)</code> or ensure your phone has a stable internet connection while syncing.
-</details>
-
-<details>
-<summary><b>❓ Special characters or commas breaking message format</b></summary>
-<br>
-Wrap your message content in quotation marks (<code>"..."</code>) within <code>contacts.csv</code>. The script automatically handles URL encoding via <code>urllib.parse.quote()</code>.
-</details>
-
-<details>
-<summary><b>❓ Chrome fails to launch or crashes</b></summary>
-<br>
-Make sure Google Chrome is up to date. Run <code>pip install --upgrade webdriver-manager selenium</code> to ensure the latest compatible driver bindings.
-</details>
+> [!IMPORTANT]
+> - ✅ **Test first**: Send to your personal email/phone number before running large campaigns.
+> - ✅ **Pacing**: Both scripts enforce built-in delay intervals (3–5 seconds) between dispatches to maintain healthy sender reputation.
+> - ✅ **Consent**: Ensure all recipients have opted in or have a legitimate relationship to your organization.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for clean & efficient automation.</sub>
+  <sub>Built with ❤️ for clean, modular, and effortless bulk outreach.</sub>
 </div>
